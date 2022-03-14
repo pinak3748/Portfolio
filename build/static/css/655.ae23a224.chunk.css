@@ -1,0 +1,2 @@
+.app__about{flex:1 1;flex-direction:column;width:100%}.app__profiles{flex-wrap:wrap;justify-content:center;margin-top:2rem}.app__profile-item,.app__profiles{align-items:flex-start;display:flex}.app__profile-item{flex-direction:column;justify-content:flex-start;margin:2rem;width:190px}.app__profile-item img{border-radius:15px;height:170px;object-fit:cover;width:100%}@media screen and (min-width:2000px){.app__profile-item{margin:2rem 4rem;width:370px}.app__profile-item img{height:320px}}
+/*# sourceMappingURL=655.ae23a224.chunk.css.map*/

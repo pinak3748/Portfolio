@@ -79,6 +79,7 @@ const Header = () => (
         src={images.circle}
         alt="profile_circle"
         className="overlay_circle"
+        sizes="(min-width: 600px) 50vw, 100vw"
       />
     </motion.div>
 
@@ -89,7 +90,7 @@ const Header = () => (
     >
       {[images.mongodb, images.next, images.mu5].map((circle, index) => (
         <div className="circle-cmp app__flex" key={`circle-${index}`}>
-          <img src={circle} alt="profile_bg" />
+          <img src={circle} alt="profile_bg" sizes="(min-width: 650px) 50vw, 100vw" />
         </div>
       ))}
     </motion.div>

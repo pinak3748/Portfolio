@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useEffect, Suspense, lazy } from 'react';
 import WebFont from 'webfontloader';
-import Lottie from 'react-lottie';
-import { About, Footer, Header, Work, Skills } from './container';
-import { Navbar } from './components';
-import images from './constants/images';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Loading } from './components';
+import { ErrorFallback } from './constants';
 import './App.scss';
 
+const Navbar = lazy(() => import('./components/Navbar/Navbar'));
+const About = lazy(() => import('./container/About/About'));
+const Footer = lazy(() => import('./container/Footer/Footer'));
+const Header = lazy(() => import('./container/Header/Header'));
+const Skills = lazy(() => import('./container/Skills/Skills'));
+const Works = lazy(() => import('./container/Work/Work'));
+
 function App() {
-  const [completed, setcompleted] = useState(false);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: images.loader,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
-
   useEffect(() => {
     WebFont.load({
       google: {
@@ -33,27 +27,21 @@ function App() {
         ],
       },
     });
-
-    setTimeout(() => {
-      setcompleted(true);
-    }, 2500);
   }, []);
 
   return (
-    !completed ? (
-      <div className="loading">
-        <Lottie options={defaultOptions} height={400} width={400} />
-      </div>
-    ) : (
-      <div className="app">
-        <Navbar />
-        <Header />
-        <About />
-        <Work />
-        <Skills />
-        <Footer />
-      </div>
-    )
+    <div className="app">
+      <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => {}}>
+        <Suspense fallback={Loading}>
+          <Navbar />
+          <Header />
+          <About />
+          <Works />
+          <Skills />
+          <Footer />
+        </Suspense>
+      </ErrorBoundary>
+    </div>
   );
 }
 
